@@ -1,0 +1,16 @@
+<h1>Baggage</h1>
+
+<%= link_to "Queries list", queriesList_path %>
+
+<ul>
+  <% @baggages.each do |baggage| %>
+    <li>
+      <a href="<%= baggage_path(baggage) %>">
+        Count : <%= baggage.count %>
+        Total weight : <%= baggage.total_weight %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Baggage", new_baggage_path %>

@@ -1,5 +1,5 @@
 {
-  "name": "ror-project2021-fall",
+  "name": "ror-project",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
