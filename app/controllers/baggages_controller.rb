@@ -62,20 +62,30 @@ class BaggagesController < ApplicationController
     (count / length).to_i
   end
 
-  def average_difference
+  def task_a
     all = Baggage.all
-    average_weight_general = get_average_weight(all)
-
-    @baggages = all.select do |baggage|
-      (baggage.get_average_weight - average_weight_general).abs <= 0.3
+    @baggages = []
+    unless all.empty?
+      average_weight_general = get_average_weight(all)
+      @baggages = all.select do |baggage|
+        (baggage.get_average_weight - average_weight_general).abs <= 0.3
+      end
     end
   end
 
   def task_b
     all = Baggage.all
-    @average_count = get_average_count(all)
+
+    @average_count = 0
     @baggage_more_than_two = 0
     @baggage_more_than_average = 0
+
+    if all.empty?
+      return
+    end
+
+    @average_count = get_average_count(all)
+
     all.each do |baggage|
       current_count = baggage.count
       if current_count > 2
@@ -90,6 +100,11 @@ class BaggagesController < ApplicationController
   def task_c
     all = Baggage.all
     @answer = false
+
+    if all.length <= 1
+      return @answer
+    end
+
     sorted = all.sort { |first, second| first.count <=> second.count }
 
     (0...sorted.length - 1).each do |i|
@@ -102,32 +117,49 @@ class BaggagesController < ApplicationController
   end
 
   def task_d
-    if @baggage_array.length == 1
-      return true
+    all = Baggage.all
+    @answer = false
+
+    if all.empty?
+      return @answer
     end
 
-    sorted_by_count = @baggage_array.sort { |first, second| first.count <=> second.count }
-    sorted_by_weight = @baggage_array.sort { |first, second| first.total_weight <=> second.total_weight }
+    if all.length == 1
+      @answer = true
+      return @answer
+    end
 
-    last_index = @baggage_array.length - 1
+    sorted_by_count = all.sort { |first, second| first.count <=> second.count }
+    sorted_by_weight = all.sort { |first, second| first.total_weight <=> second.total_weight }
+
+    last_index = all.length - 1
 
     if sorted_by_count[last_index].count == sorted_by_count[last_index - 1].count &&
       sorted_by_weight[last_index].total_weight == sorted_by_weight[last_index - 1].total_weight
-      return false
+      return @answer
     end
 
-    sorted_by_count[last_index] == sorted_by_weight[last_index]
+    @answer = sorted_by_count[last_index] == sorted_by_weight[last_index]
   end
 
   def task_e
-    with_one_item = @baggage_array.select { |baggage| baggage.count == 1 }
+    all = Baggage.all
+    @answer = false
+
+    if all.empty?
+      return @answer
+    end
+
+    with_one_item = all.select { |baggage| baggage.count == 1 }
 
     with_one_item.each do |baggage|
       if baggage.total_weight < 30
-        return true
+        @answer = true
+        return @answer
       end
     end
-    false
+
+    @answer
   end
 
   private

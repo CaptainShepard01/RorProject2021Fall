@@ -13,9 +13,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.16.4",
     "webpack-dev-server": "3"
-  },
-  "engines": {
-    "node": "16.X"
   }
 }

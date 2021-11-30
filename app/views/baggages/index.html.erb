@@ -1,16 +1,40 @@
-<h1>Baggage</h1>
+<style>
+    td, th {text-align: center;
+        vertical-align: middle;}
+</style>
 
-<%= link_to "Queries list", queriesList_path %>
+<div class="container">
+  <h1>Baggage</h1>
 
-<ul>
-  <% @baggages.each do |baggage| %>
-    <li>
-      <a href="<%= baggage_path(baggage) %>">
-        Count : <%= baggage.count %>
-        Total weight : <%= baggage.total_weight %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+  <h3>
+    <%= link_to "Queries list", queriesList_path %>
+  </h3>
 
-<%= link_to "New Baggage", new_baggage_path %>
+  <table class="table table-dark">
+    <thead>
+    <tr>
+      <th scope="col">Count</th>
+      <th scope="col">Total weight</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <% @baggages.each do |baggage| %>
+      <tr>
+        <td>
+          <%= baggage.count %>
+        </td>
+        <td>
+          <%= baggage.total_weight %>
+        </td>
+        <td>
+          <button type="button" class="btn btn-dark" onclick="location.href='<%= baggage_path(baggage) %>'">Show</button>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <h3>
+    <%= link_to "New Baggage", new_baggage_path %>
+  </h3>
+
+</div>

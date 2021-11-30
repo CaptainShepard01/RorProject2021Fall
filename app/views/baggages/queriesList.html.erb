@@ -1,7 +1,13 @@
-<h1>Queries list</h1>
-<ul>
-  <li><%= link_to "Average weight differs", average_difference_path %></li>
-  <li><%= link_to "Count statistics", count_stats_path %></li>
-  <li><%= link_to "Are there two passengers with almost the same carriage?", same_weights_path %></li>
-</ul>
-<%= link_to "Main", root_path %>
+<div class="container">
+  <h1>Queries list</h1>
+  <ul>
+    <li><%= link_to "Passengers with average weight of baggage is not further from general average weight than 0.3 kg", task_a_path %></li>
+    <li><%= link_to "Count statistics", task_b_path %></li>
+    <li><%= link_to "Are there two passengers with almost the same carriage?", task_c_path %></li>
+    <li><%= link_to "Is there a passenger with the biggest count of baggage as well as weight?", task_d_path %></li>
+    <li><%= link_to "Is there a passenger with 1 baggage and weight < 30 kg?", task_e_path %></li>
+  </ul>
+  <h3>
+    <%= link_to "Main", root_path %>
+  </h3>
+</div>

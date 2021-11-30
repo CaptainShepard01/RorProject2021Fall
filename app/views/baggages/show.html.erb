@@ -1,11 +1,11 @@
-<h1>Count : <%= @baggage.count %></h1>
+<div class="container">
+  <h1>Count : <%= @baggage.count %></h1>
 
-<p>Total weight : <%= @baggage.total_weight %></p>
+  <p>Total weight : <%= @baggage.total_weight %></p>
 
-<ul>
-  <li><%= link_to "Edit", edit_baggage_path(@baggage) %></li>
-  <li><%= link_to "Destroy", baggage_path(@baggage),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
-  <%= link_to "Main", root_path %>
-</ul>
+  <ul>
+    <li><%= link_to "Edit", edit_baggage_path(@baggage) %></li>
+      <li><%= link_to "Delete", @baggage, method: :delete, data: { confirm: "Are you sure?" } %></li>
+    <%= link_to "Main", root_path %>
+  </ul>
+</div>
